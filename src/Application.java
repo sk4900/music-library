@@ -5,6 +5,15 @@ import control.*;
  */
 public final class Application {
 
+    private static void init() {
+        CSVReader csvReader = new CSVReader();
+        ArtistHolder artistHolder = new ArtistHolder();
+        ReleaseHolder releaseHolder = new ReleaseHolder();
+        SongHolder songHolder = new SongHolder();
+        DatabaseCreator databaseCreator = new DatabaseCreator(csvReader, artistHolder, releaseHolder, songHolder);
+        databaseCreator.loadDatabase();
+    }
+
     /**
      * The entry point to the Muze Music Library System.
      * Connects all the components of the application together.

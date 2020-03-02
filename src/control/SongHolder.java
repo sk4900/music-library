@@ -15,7 +15,7 @@ public class SongHolder implements PlayableHolder{
     }
 
     public boolean add(String[] songData) {
-        if(songs.containsValue(songData[0]))
+        if(songs.containsKey(songData[0]))
             return false;
         else {
             Song newSong = new Song(songData[0], songData[1], Integer.valueOf(songData[2]), songData[3]);

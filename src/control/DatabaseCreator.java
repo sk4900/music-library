@@ -24,6 +24,7 @@ public class DatabaseCreator {
     public void loadDatabase() {
         fillArtistHolder();
         fillSongHolder();
+        fillReleaseHolder();
     }
 
     private void fillArtistHolder() {
@@ -50,6 +51,6 @@ public class DatabaseCreator {
         for (String[] data : releaseData) {
             releaseHolder.add(data);
         }
-        //System.out.println("Added " + artistData.size() + " artists to the database.");
+        System.out.println("Added " + releaseData.size() + " releases to the database.");
     }
 }

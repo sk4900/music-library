@@ -13,7 +13,7 @@ public class ArtistHolder implements PlayableHolder {
     }
 
     public boolean add(String[] artistData) {
-        if(artists.containsValue(artistData[0]))
+        if(artists.containsKey(artistData[0]))
             return false;
         else {
             Artist newArtist;

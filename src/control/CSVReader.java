@@ -9,7 +9,6 @@ public class CSVReader {
 
     public ArrayList<String[]> loadFile(String filePath) {
 
-        String fileToBeRead = "/rsc/" + filePath;
         String splitOnChar = ",";
         ArrayList<String[]> data = new ArrayList<>();
 
