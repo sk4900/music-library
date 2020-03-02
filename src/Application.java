@@ -50,15 +50,19 @@ public final class Application {
 
         while(true){
             String command = scanner.nextLine();
+            String[] array = command.split(" ");
 
-            if (command.equals("help")){
+            if (array[0].equals("help")){
                 System.out.println("exit: exits the program");
+
                 System.out.println();
                 System.out.println("search_artist *:");
                 System.out.println("search for an artist by their *name (one or more words).");
+
                 System.out.println();
                 System.out.println("search_songs *(title, artist, longer, shorter) **:");
                 System.out.println("search for a song by its artist, title, or duration.");
+
                 System.out.println();
                 System.out.println("search_releases *(title, artist, track, release_range) **:");
                 System.out.println("search for a release by its name, the name of its artist, " +
@@ -71,9 +75,34 @@ public final class Application {
                 System.out.println();
                 System.out.println("remove *song/release *name:");
                 System.out.println("Remove a song or release from your persona library by specifying its name.");
+
+                System.out.println();
+                System.out.println("rate *song *stars:");
+                System.out.println("Rate a song by specifying its name followed by a number from 1-5.");
+
+                System.out.println();
+                System.out.println("browse:");
+                System.out.println("Browse your personal library. Lists all the artists in your library alphabetically, " +
+                        "then all of their songs in your library.");
+
+                System.out.println();
+                System.out.println("explore *(artist/release name):");
+                System.out.println("Only accessible while browsing your library. Allows you to first explore all songs and releases" +
+                        "by a single artist, then all songs in one of their releases.");
+
+                System.out.println();
+                System.out.println("back:");
+                System.out.println("Only accessible while exploring an artist's release. Returns you to the artist's page.");
+
+                System.out.println();
             }
 
-            if (command.equals("exit")){break;}
+            if (array[0].equals("exit")){break;}
+
+            if (array[0].equals("search_artist")){
+                //execute artist search in database
+            }
+
         }
 
         /*songHolder.setSorter(nameSort);
