@@ -2,9 +2,6 @@ package control;
 
 import model.Playable;
 import model.Release;
-import model.Song;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,7 +20,7 @@ public class ReleaseHolder implements PlayableHolder {
         if(releases.containsKey(releaseData[0]))
             return false;
         else {
-            currentTrackList = Arrays.copyOfRange(releaseData, 5, releaseData.length - 1);
+            currentTrackList = Arrays.copyOfRange(releaseData, 5, releaseData.length);
             Release newRelease = new Release(releaseData[0], releaseData[1], releaseData[2], releaseData[3],
                     releaseData[4]);
             releases.put(releaseData[0], newRelease);
@@ -33,12 +30,11 @@ public class ReleaseHolder implements PlayableHolder {
 
     public void createRelations(String guid, ArrayList<Playable> songList) {
         releases.get(guid).addTrackList(songList);
+        currentTrackList = null;
     }
 
     public String[] getRelations(String guid) {
-        String[] trackList = currentTrackList.clone();
-        currentTrackList = null;
-        return trackList;
+        return currentTrackList;
     }
 
     public Playable get(String id) {

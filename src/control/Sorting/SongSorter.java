@@ -1,18 +1,17 @@
 package control.Sorting;
 
 import model.Playable;
-import model.Song;
-
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class SongSorter implements PlayableSorter{
+public abstract class SongSorter implements PlayableSorter, Comparator<Playable> {
 
-    public void sort() {
+    public abstract void sortAscending(ArrayList<Playable> songs);
 
-    }
+    public abstract void sortDescending(ArrayList<Playable> songs);
 
-    public ArrayList<Playable> find (String parameter) {
-        return null;
-    }
+    public abstract ArrayList<Playable> find(ArrayList<Playable> objects, String parameter);
+
+    public abstract int compare(Playable p1, Playable p2);
 
 }

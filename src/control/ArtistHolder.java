@@ -2,7 +2,6 @@ package control;
 
 import model.Artist;
 import model.Playable;
-
 import java.util.HashMap;
 
 public class ArtistHolder implements PlayableHolder {
@@ -26,12 +25,18 @@ public class ArtistHolder implements PlayableHolder {
         return true;
     }
 
+    public void attachPlayableToArtist(Playable playableItem, String guid) {
+        Artist currentArtist = artists.get(guid);
+        currentArtist.createRelations(playableItem);
+    }
+
+
     public boolean containsArtistGUID(String guid) {
         return artists.containsKey(guid);
     }
 
     public String[] getRelations(String guid){
-        return new String[] {guid};
+        return null;
     }
 
     public Playable get(String id) {

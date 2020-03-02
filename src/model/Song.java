@@ -1,12 +1,12 @@
 package model;
 
 public class Song implements Playable{
-    private String guid, artistguid, title;
+    private String guid, aguid, title;
     private int duration;
 
     public Song (String guid, String aguid, int duration, String title) {
         this.guid = guid;
-        artistguid = aguid;
+        this.aguid = aguid;
         this.duration = duration;
         this.title = title;
     }
@@ -15,5 +15,9 @@ public class Song implements Playable{
 
     public String getName() {return title;}
 
-    public String getArtistGUID() {return artistguid;}
+    public String getAGUID() {return aguid;}
+
+    public String toString() {
+        return title + ", " + guid + ", " + aguid;
+    }
 }
