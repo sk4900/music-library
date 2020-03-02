@@ -5,7 +5,7 @@ import control.*;
  */
 public final class Application {
 
-    private static void init() {
+    private static void initDatabase() {
         CSVReader csvReader = new CSVReader();
         ArtistHolder artistHolder = new ArtistHolder();
         ReleaseHolder releaseHolder = new ReleaseHolder();
@@ -20,12 +20,7 @@ public final class Application {
      * @param args expects and parses commands from the user.
      */
     public static void main(String[] args){
-        CSVReader csvReader = new CSVReader();
-        ArtistHolder artistHolder = new ArtistHolder();
-        ReleaseHolder releaseHolder = new ReleaseHolder();
-        SongHolder songHolder = new SongHolder();
-        DatabaseCreator databaseCreator = new DatabaseCreator(csvReader, artistHolder, releaseHolder, songHolder);
-        databaseCreator.loadDatabase();
+        initDatabase();
 
 
 

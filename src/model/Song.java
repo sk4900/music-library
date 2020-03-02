@@ -7,9 +7,13 @@ public class Song implements Playable{
     public Song (String guid, String aguid, int duration, String title) {
         this.guid = guid;
         artistguid = aguid;
-        duration = duration;
+        this.duration = duration;
         this.title = title;
     }
 
     public String getGUID() {return guid;}
+
+    public String getName() {return title;}
+
+    public String getArtistGUID() {return artistguid;}
 }

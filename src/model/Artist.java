@@ -13,6 +13,7 @@ public class Artist implements Playable{
 
     public String getGUID() {return guid;}
 
+    public String getName() {return name;}
 
 
 }

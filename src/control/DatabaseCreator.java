@@ -1,5 +1,8 @@
 package control;
 
+import model.Release;
+import model.Song;
+
 import java.util.ArrayList;
 
 public class DatabaseCreator {
@@ -22,35 +25,26 @@ public class DatabaseCreator {
     }
 
     public void loadDatabase() {
-        fillArtistHolder();
-        fillSongHolder();
-        fillReleaseHolder();
+        fillPlayableHolder(artistHolder, artistsFile);
+        fillPlayableHolder(songHolder, songsFile);
+        fillPlayableHolder(releaseHolder, releaseFile);
     }
 
-    private void fillArtistHolder() {
-        ArrayList<String[]> artistData = csvReader.loadFile(artistsFile);
+    private void fillPlayableHolder(PlayableHolder holder, String filename) {
+        ArrayList<String[]> playableData = csvReader.loadFile(filename);
 
-        for (String[] data : artistData) {
-            artistHolder.add(data);
+        for (String[] data : playableData) {
+            holder.add(data);
+            String[] relationList = holder.getRelations(data[0]);
+            if (relationList != null)
+                createRelations(data[0], relationList, filename);
         }
-        System.out.println("Added " + artistData.size() + " artists to the database.");
+        System.out.println("Added " + playableData.size() + " playable elements to the database from " + filename);
     }
 
-    private void fillSongHolder() {
-        ArrayList<String[]> songData = csvReader.loadFile(songsFile);
+    private void createRelations(String guid, String[] relationList, String holderType) {
+        if (artistHolder.containsArtistGUID(relationList[0])){
 
-        for (String[] data : songData) {
-            songHolder.add(data);
         }
-        System.out.println("Added " + songData.size() + " song to the database.");
-    }
-
-    private void fillReleaseHolder() {
-        ArrayList<String[]> releaseData = csvReader.loadFile(releaseFile);
-
-        for (String[] data : releaseData) {
-            releaseHolder.add(data);
-        }
-        System.out.println("Added " + releaseData.size() + " releases to the database.");
     }
 }

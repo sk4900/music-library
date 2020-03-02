@@ -26,6 +26,14 @@ public class ArtistHolder implements PlayableHolder {
         return true;
     }
 
+    public boolean containsArtistGUID(String guid) {
+        return artists.containsKey(guid);
+    }
+
+    public String[] getRelations(String guid){
+        return new String[] {guid};
+    }
+
     public Playable get(String id) {
         return artists.get(id);
     }

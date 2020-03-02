@@ -1,9 +1,9 @@
 package control;
 
-import model.Artist;
 import model.Playable;
 import model.Song;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SongHolder implements PlayableHolder{
@@ -22,6 +22,20 @@ public class SongHolder implements PlayableHolder{
             songs.put(songData[0], newSong);
         }
         return true;
+    }
+
+    public String[] getRelations(String guid) {
+        String[] artistID = new String[] {songs.get(guid).getArtistGUID()};
+        return artistID;
+    }
+
+    public ArrayList<Playable> getSongList (String[] trackList) {
+        ArrayList<Playable> songList = new ArrayList<>();
+
+        for (String currentTrack : trackList) {
+            songList.add(songs.get(currentTrack));
+        }
+        return songList;
     }
 
     public Playable get(String id) {
