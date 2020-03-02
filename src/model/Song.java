@@ -20,4 +20,8 @@ public class Song implements Playable{
     public String toString() {
         return title + ", " + guid + ", " + aguid;
     }
+
+    public void explore() {
+        System.out.println(this.toString());
+    }
 }

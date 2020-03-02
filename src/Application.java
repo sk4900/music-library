@@ -3,6 +3,7 @@ import control.Sorting.PlayableSorter;
 import control.Sorting.SongSortByAGUID;
 import control.Sorting.SongSorter;
 import control.Sorting.SorterHolder;
+import model.Artist;
 import model.Playable;
 import model.Song;
 
@@ -15,10 +16,11 @@ public final class Application {
 
     private static SongHolder songHolder;
     private static SorterHolder sorterHolder;
+    private static ArtistHolder artistHolder;
 
     private static void initDatabase() {
         CSVReader csvReader = new CSVReader();
-        ArtistHolder artistHolder = new ArtistHolder();
+        artistHolder = new ArtistHolder();
         ReleaseHolder releaseHolder = new ReleaseHolder();
         Application.songHolder = new SongHolder();
         Application.sorterHolder = new SorterHolder();
@@ -37,12 +39,17 @@ public final class Application {
         SongSorter guidSort = (SongSorter)Application.sorterHolder.getSorter("song", "guid");
         SongSorter aguidSort = (SongSorter)Application.sorterHolder.getSorter("song", "aguid");
 
-        songHolder.setSorter(nameSort);
+        Artist imogen = (Artist)artistHolder.get("328d146c-79f1-4eb6-9e40-8ee5710c14e5");
+        imogen.explore();
+
+        /*songHolder.setSorter(nameSort);
         ArrayList<Playable> songs = songHolder.findMatches("A");
 
         for (Playable song : songs) {
             System.out.println(song);
-        }
+        }*/
+
+
 
         /*if (args.length == 0){
             System.out.println("Commands expected. Refer to help file for list of commands.");

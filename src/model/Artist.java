@@ -11,7 +11,10 @@ public class Artist implements Playable{
     public Artist(String id, String artistName, @Nullable String desc) {
         guid = id;
         name = artistName;
-        disamb = desc;
+        if (desc != null)
+            disamb = desc;
+        else
+            disamb = "";
         playableCreations = new ArrayList<>();
     }
 
@@ -24,7 +27,15 @@ public class Artist implements Playable{
     public String getName() {return name;}
 
     public String toString() {
-        return name + ", " + guid;
+
+        return name + ", " + guid + ", " + disamb;
+    }
+
+    public void explore () {
+        System.out.println(this.toString());
+        for (Playable creat : playableCreations) {
+            System.out.println(creat);
+        }
     }
 
 

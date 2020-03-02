@@ -24,4 +24,15 @@ public class Release implements Playable {
     public String getName() {return title;}
 
     public String getAGUID() {return aguid;}
+
+    public String toString() {
+        return title + ", " + guid + ", " + aguid+ ", " + medium + ", " + date;
+    }
+
+    public void explore () {
+        System.out.println(this.toString());
+        for (Playable song: songs) {
+            System.out.println(song);
+        }
+    }
 }
