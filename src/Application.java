@@ -1,4 +1,4 @@
-
+import control.*;
 
 /**
  * Entry point to the Muze Music Library System (MMLS)
@@ -11,6 +11,15 @@ public final class Application {
      * @param args expects and parses commands from the user.
      */
     public static void main(String[] args){
+        CSVReader csvReader = new CSVReader();
+        ArtistHolder artistHolder = new ArtistHolder();
+        ReleaseHolder releaseHolder = new ReleaseHolder();
+        SongHolder songHolder = new SongHolder();
+        DatabaseCreator databaseCreator = new DatabaseCreator(csvReader, artistHolder, releaseHolder, songHolder);
+        databaseCreator.loadDatabase();
+
+
+
 
         if (args.length == 0){
             System.out.println("Commands expected. Refer to help file for list of commands.");
