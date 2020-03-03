@@ -1,7 +1,6 @@
 package model;
 
-//import com.sun.istack.internal.Nullable;
-import org.jetbrains.annotations.Nullable;
+
 
 import java.util.ArrayList;
 
@@ -9,7 +8,7 @@ public class Artist implements Playable{
     private String guid, name, disamb;
     private ArrayList<Playable> playableCreations;
 
-    public Artist(String id, String artistName, @Nullable String desc) {
+    public Artist(String id, String artistName, String desc) {
         guid = id;
         name = artistName;
         if (desc != null)
