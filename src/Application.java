@@ -6,9 +6,7 @@ import control.Sorting.PlayableSorter;
 import control.Sorting.SongSortByAGUID;
 import control.Sorting.SongSorter;
 import control.Sorting.SorterHolder;
-import model.Artist;
-import model.Playable;
-import model.Song;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +29,7 @@ public final class Application {
         Application.sorterHolder = new SorterHolder();
         DatabaseCreator databaseCreator = new DatabaseCreator(csvReader, artistHolder, releaseHolder, songHolder, sorterHolder);
         databaseCreator.loadDatabase();
+        new PersonalLibrary(artistHolder, songHolder, releaseHolder);
     }
 
     /**
