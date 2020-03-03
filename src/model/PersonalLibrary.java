@@ -2,42 +2,47 @@ package model;
 import control.*;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PersonalLibrary {
     private HashMap<String, Playable> collection;
+    private HashMap<String, Integer> ratings;
     private ArtistHolder artists;
     private SongHolder songs;
     private ReleaseHolder releases;
     private String filename = "library.txt";
 
-    public PersonalLibrary(ArtistHolder artists, SongHolder songs, ReleaseHolder releases){
+    public PersonalLibrary(ArtistHolder artists, SongHolder songs, ReleaseHolder releases) {
         this.artists = artists;
         this.songs = songs;
         this.releases = releases;
+        ratings = new HashMap<>();
+        collection = new HashMap<>();
         try {
             File library = new File(filename);
-            if(library.createNewFile()){
+            if (library.createNewFile()) {
                 System.out.println("Library created");
-            }
-            else{
+            } else {
                 BufferedReader reader;
                 reader = new BufferedReader(new FileReader(filename));
                 String line = reader.readLine();
                 while (line != null) {
                     line = reader.readLine();
-                    this.collection.put(line, searchGUID(line) );
+                    this.collection.put(line, searchGUID(line));
                 }
                 reader.close();
+                this.collection.forEach((k, v) -> this.ratings.put(k, 0));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void writeToLibrary(Playable playable){
+    public void add(Playable playable) {
         if (!collection.containsKey(playable)) {
             collection.put(playable.getGUID(), playable);
+            ratings.put(playable.getGUID(), 0);
             try {
                 FileWriter myWriter = new FileWriter("filename.txt");
                 myWriter.write(playable.getGUID() + "\n");
@@ -45,14 +50,15 @@ public class PersonalLibrary {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else{
+        } else {
             System.out.println("Song/Release is already in your library.");
         }
     }
-    private boolean eraseFromLibrary(Playable playable) throws IOException {
+
+    public boolean remove(Playable playable) throws IOException {
         String GUID = playable.getGUID();
         if (collection.remove(GUID, playable)) {
+            ratings.remove(GUID);
             File inputFile = new File(filename);
             File tempFile = new File("TempFile.txt");
 
@@ -71,21 +77,35 @@ public class PersonalLibrary {
             reader.close();
             inputFile.delete();
             return tempFile.renameTo(inputFile);
-        }
-        else{
+        } else {
             System.out.println("Song/Release is currently not in your library.");
             return false;
         }
     }
-    private Playable searchGUID(String GUID){
+
+    public Playable searchGUID(String GUID) {
         Playable searchResult;
-        if (songs.get(GUID) != null){
+        if (songs.get(GUID) != null) {
             searchResult = songs.get(GUID);
-        }
-        else {
+        } else {
             searchResult = releases.get(GUID);
         }
         return searchResult;
     }
+    public void rateSong(int rating, Playable playable) {
+        ratings.put(playable.getGUID(), rating);
 
+    }
+    public void rateRelease(Playable playable){
+        Release release = (Release) collection.get(playable.getGUID());
+        ArrayList<Playable> songs = release.getTrackList();
+        int numberSongs = songs.size();
+        int totalRatings = 0;
+        for (Playable song: songs) {
+            String sguid = song.getGUID();
+            totalRatings += ratings.get(sguid);
+        }
+        int avRating = totalRatings = totalRatings / numberSongs;
+        ratings.put(playable.getGUID(), avRating);
+    }
 }
