@@ -6,18 +6,15 @@ import java.util.HashMap;
 
 public class PersonalLibrary {
     private HashMap<String, Playable> collection;
-    private DatabaseCreator library;
-
+    private ArtistHolder artists;
+    private SongHolder songs;
+    private ReleaseHolder releases;
     private String filename = "library.txt";
 
-    public PersonalLibrary(){
-        CSVReader csvReader = new CSVReader();
-        ArtistHolder artistHolder = new ArtistHolder();
-        ReleaseHolder releaseHolder = new ReleaseHolder();
-        SongHolder songHolder = new SongHolder();
-        //this.library = new DatabaseCreator(csvReader, artistHolder, releaseHolder, songHolder);
-    }
-    private void CreateLibrary(DatabaseCreator database){
+    public PersonalLibrary(ArtistHolder artists, SongHolder songs, ReleaseHolder releases){
+        this.artists = artists;
+        this.songs = songs;
+        this.releases = releases;
         try {
             File library = new File(filename);
             if(library.createNewFile()){
@@ -29,15 +26,15 @@ public class PersonalLibrary {
                 String line = reader.readLine();
                 while (line != null) {
                     line = reader.readLine();
-                    //this.collection.put(line, database.getPlayable(line));
+                    this.collection.put(line, searchGUID(line) );
                 }
                 reader.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
     private void writeToLibrary(Playable playable){
         if (!collection.containsKey(playable)) {
             collection.put(playable.getGUID(), playable);
@@ -79,6 +76,16 @@ public class PersonalLibrary {
             System.out.println("Song/Release is currently not in your library.");
             return false;
         }
+    }
+    private Playable searchGUID(String GUID){
+        Playable searchResult;
+        if (songs.get(GUID) != null){
+            searchResult = songs.get(GUID);
+        }
+        else {
+            searchResult = releases.get(GUID);
+        }
+        return searchResult;
     }
 
 }
