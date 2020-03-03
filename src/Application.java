@@ -19,6 +19,7 @@ public final class Application {
     private static SorterHolder sorterHolder;
     private static ArtistHolder artistHolder;
     private static PersonalLibrary library;
+
     private static void initDatabase() {
         CSVReader csvReader = new CSVReader();
         artistHolder = new ArtistHolder();

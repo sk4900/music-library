@@ -94,6 +94,31 @@ public class PersonalLibrary {
     }
     public void rateSong(int rating, Playable playable) {
         ratings.put(playable.getGUID(), rating);
+        try {
+
+            File inputFile = new File(filename);
+            File tempFile = new File("TempFile.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String currentLine;
+
+            while ((currentLine = reader.readLine()) != null) {
+                String trimmedLine = currentLine.trim();
+                if (trimmedLine.equals(playable.getGUID())) currentLine.concat("," + rating);
+                writer.write(currentLine + System.getProperty("line.separator"));
+            }
+
+            writer.close();
+            reader.close();
+            inputFile.delete();
+            tempFile.renameTo(inputFile);
+            System.out.println(playable.getName() + " has been rated " + rating);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
     public void rateRelease(Playable playable){
