@@ -1,5 +1,7 @@
 package control;
 
+import model.Playable;
+
 import java.util.ArrayList;
 
 public class DatabaseCreator {
@@ -52,5 +54,18 @@ public class DatabaseCreator {
             releaseHolder.add(data);
         }
         System.out.println("Added " + releaseData.size() + " releases to the database.");
+    }
+    public Playable getPlayable(String id) {
+        Playable foundPlayable = null;
+        if (artistHolder.get(id) != null){
+            foundPlayable = artistHolder.get(id);
+        }
+        else if (songHolder.get(id) != null){
+            foundPlayable = songHolder.get(id);
+        }
+        else if (releaseHolder.get(id) != null){
+            foundPlayable = releaseHolder.get(id);
+        }
+        return foundPlayable;
     }
 }
