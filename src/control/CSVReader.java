@@ -3,15 +3,21 @@ package control;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class CSVReader {
 
     public ArrayList<String[]> loadFile(String filePath) {
 
+        Path currentRelativePath = Paths.get("");
+        String systemPath = currentRelativePath.toAbsolutePath().toString();
+        String file = systemPath + "\\rsc\\" + filePath;
+        
         ArrayList<String[]> data = new ArrayList<>();
 
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(file))) {
             String line;
 
             while ((line = fileReader.readLine()) != null) {
