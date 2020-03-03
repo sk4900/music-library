@@ -31,6 +31,15 @@ public class Release implements Playable {
         return title + ", " + guid + ", " + aguid+ ", " + medium + ", " + date;
     }
 
+    public int getDuration() {
+        int total = 0;
+        for (Playable playableSong : songs) {
+            Song currentSong = (Song)playableSong;
+            total += currentSong.getDuration();
+        }
+        return total;
+    }
+
     public void explore () {
         System.out.println(this.toString());
         for (Playable song: songs) {

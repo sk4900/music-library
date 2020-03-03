@@ -30,6 +30,14 @@ public class Artist implements Playable{
 
     }
 
+    public int getDuration() {
+        int total = 0;
+        for (Playable creat : playableCreations) {
+           total += creat.getDuration();
+        }
+        return total;
+    }
+
     public String getGUID() {return guid;}
 
     public String getName() {return name;}

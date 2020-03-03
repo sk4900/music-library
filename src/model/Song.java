@@ -11,6 +11,8 @@ public class Song implements Playable{
         this.title = title;
     }
 
+    public int getDuration() {return duration;}
+
     public String getGUID() {return guid;}
 
     public String getName() {return title;}
