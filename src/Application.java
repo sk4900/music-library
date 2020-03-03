@@ -20,7 +20,7 @@ public final class Application {
     private static SongHolder songHolder;
     private static SorterHolder sorterHolder;
     private static ArtistHolder artistHolder;
-
+    private static PersonalLibrary library;
     private static void initDatabase() {
         CSVReader csvReader = new CSVReader();
         artistHolder = new ArtistHolder();
@@ -29,7 +29,7 @@ public final class Application {
         Application.sorterHolder = new SorterHolder();
         DatabaseCreator databaseCreator = new DatabaseCreator(csvReader, artistHolder, releaseHolder, songHolder, sorterHolder);
         databaseCreator.loadDatabase();
-        new PersonalLibrary(artistHolder, songHolder, releaseHolder);
+        library = new PersonalLibrary(artistHolder, songHolder, releaseHolder);
     }
 
     /**
@@ -108,12 +108,9 @@ public final class Application {
 
             if (array[0].equals("add")){
                 if (array[1].equals("song")){
-                    Command theCommand = new Command(new AddPlayable(songHolder.get(songHolder.IDGivenName(array[2]))));
-
                     System.out.print(songHolder.get(songHolder.IDGivenName(array[2])).getName());
 
                     System.out.println(array[2]);
-                    theCommand.commandRequest();
                 }
             }
 

@@ -9,7 +9,7 @@ public class RateRelease implements Action {
     public RateRelease(Playable playable){
         this.playable = playable;
     }
-    public void performAction(){
+    public void performAction(Playable playable){
         library.rateRelease(playable);
 
     }

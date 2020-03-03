@@ -6,13 +6,12 @@ import model.Playable;
 import java.io.IOException;
 
 public class RemovePlayable implements Action{
-    private Playable playable;
     private PersonalLibrary library;
 
-    public RemovePlayable(Playable playable){
-        this.playable = playable;
+    public RemovePlayable(PersonalLibrary library){
+        this.library = library;
     }
-    public void performAction(){
+    public void performAction(Playable playable){
         try {
             library.remove(playable);
         } catch (IOException e) {

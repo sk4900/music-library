@@ -4,14 +4,12 @@ import model.PersonalLibrary;
 import model.Playable;
 
 public class RateSong implements Action{
-    private int rating;
     private PersonalLibrary library;
-    private Playable playable;
-    public RateSong(Playable playable, int rating){
-        this.rating = rating;
-        this.playable = playable;
+    private int rating;
+    public RateSong(PersonalLibrary library, int rating){
+        this.library = library;
     }
-    public void performAction() {
+    public void performAction(Playable playable) {
         library.rateSong(rating, playable);
     }
 }

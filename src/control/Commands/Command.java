@@ -7,8 +7,8 @@ public class Command {
     public Command(Action action) {
         this.action = action;
     }
-    public void commandRequest(){
-        action.performAction();
+    public void commandRequest(Playable playable){
+        action.performAction(playable);
     }
 }
 

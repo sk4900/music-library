@@ -5,11 +5,10 @@ import model.Playable;
 
 public class AddPlayable implements Action {
     private PersonalLibrary library;
-    private Playable playable;
-    public AddPlayable(Playable playable){
-        this.playable = playable;
+    public AddPlayable(PersonalLibrary library){
+        this.library = library;
     }
-    public void performAction() {
+    public void performAction(Playable playable) {
         library.add(playable);
     }
 }
