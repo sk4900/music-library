@@ -16,8 +16,18 @@ public class Artist implements Playable{
         playableCreations = new ArrayList<>();
     }
 
+    private void removeOverlaps(ArrayList<Playable> songList) {
+        for (Playable song : songList) {
+            playableCreations.remove(song);
+        }
+    }
+
     public void createRelations(Playable playableItem) {
         playableCreations.add(playableItem);
+        if (playableItem instanceof Release) {
+            removeOverlaps(((Release) playableItem).getTrackList());
+        }
+
     }
 
     public String getGUID() {return guid;}
@@ -32,7 +42,7 @@ public class Artist implements Playable{
     public void explore () {
         System.out.println(this.toString());
         for (Playable creat : playableCreations) {
-            System.out.println(creat);
+            creat.explore();
         }
     }
 
