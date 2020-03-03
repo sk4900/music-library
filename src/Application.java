@@ -58,7 +58,7 @@ public final class Application {
                 System.out.println("exit: exits the program");
 
                 System.out.println();
-                System.out.println("search_artist *:");
+                System.out.println("search_artists *:");
                 System.out.println("search for an artist by their *name (one or more words).");
 
                 System.out.println();
@@ -101,7 +101,7 @@ public final class Application {
 
             if (array[0].equals("exit")){break;}
 
-            if (array[0].equals("search_artist")){
+            if (array[0].equals("search_artists")){
 
                 int end = array.length;
 
@@ -121,6 +121,28 @@ public final class Application {
                         System.out.println(name);
                     }
                     System.out.println();
+                }
+            }
+
+            if (array[0].equals("search_songs")){
+
+                if(array[1].equals("artist")){
+
+                }
+
+                else if(array[1].equals("title")) {
+
+                    int len = array.length - 2;
+
+
+                }
+
+                else if(array[1].equals("longer")){
+
+                }
+
+                else if(array[1].equals("shorter")){
+
                 }
             }
 
