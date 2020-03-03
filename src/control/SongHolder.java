@@ -64,4 +64,20 @@ public class SongHolder implements PlayableHolder{
         ArrayList<Playable> songList = new ArrayList<>(songs.values());
         return sorter.find(songList, matchingField);
     }
+
+    public ArrayList<String> searchByName(String[] query){
+
+        ArrayList<String> results = new ArrayList<String>();
+
+        for (Song song : songs.values()){
+            String[] songName = song.getName().split(" ");
+
+            for (String keyword : query){
+                if (keyword.equals(songName[0])){
+                    results.add(song.getName());
+                }
+            }
+        }
+        return results;
+    }
 }
