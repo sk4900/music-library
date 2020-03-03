@@ -106,7 +106,9 @@ public class PersonalLibrary {
 
             while ((currentLine = reader.readLine()) != null) {
                 String trimmedLine = currentLine.trim();
-                if (trimmedLine.equals(playable.getGUID())) currentLine.concat("," + rating);
+                if (trimmedLine.equals(playable.getGUID())) {
+                    currentLine = currentLine.concat(", " + rating);
+                }
                 writer.write(currentLine + System.getProperty("line.separator"));
             }
 
