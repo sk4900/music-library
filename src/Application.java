@@ -182,9 +182,13 @@ public final class Application {
 
                 else if(array[1].equals("longer")){
 
+                    songHolder.listSongByDuration(Integer.parseInt(array[2]), "longer");
+
                 }
 
                 else if(array[1].equals("shorter")){
+
+                    songHolder.listSongByDuration(Integer.parseInt(array[2]), "shorter");
 
                 }
             }
