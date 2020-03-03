@@ -15,12 +15,12 @@ public class SongSortByGUID extends SongSorter {
 
     @Override
     public void sortAscending(ArrayList<Playable> songs) {
-        quickSort.quickSortAsc(songs,this);
+        super.sortAscending(songs, this, quickSort);
     }
 
     @Override
     public void sortDescending(ArrayList<Playable> songs) {
-        quickSort.quickSortDesc(songs,this);
+        super.sortDescending(songs, this, quickSort);
     }
 
     public ArrayList<Playable> find(ArrayList<Playable> songs, String parameter) {
@@ -59,8 +59,8 @@ public class SongSortByGUID extends SongSorter {
 
     @Override
     public int compare(Playable p1, Playable p2) {
-        Song s1 = (Song)p1;
-        Song s2 = (Song)p2;
+        Song s1 = (Song) p1;
+        Song s2 = (Song) p2;
         return s1.getGUID().compareTo(s2.getGUID());
     }
 }

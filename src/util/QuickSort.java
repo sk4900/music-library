@@ -1,5 +1,6 @@
 package util;
 
+import control.Sorting.PlayableSorter;
 import model.Playable;
 
 import java.lang.reflect.Array;
@@ -9,21 +10,28 @@ import java.util.Comparator;
 
 public class QuickSort {
 
-    public void quickSortAsc(ArrayList<Playable> list, Comparator<Playable> comp) {
-        doQuickSort(list, 0, list.size()-1, comp);
+    private PlayableSorter comp;
+
+    public void setComp(PlayableSorter playSorter) {
+        comp = playSorter;
     }
 
-    public static void doQuickSort(ArrayList<Playable> list, int p, int r, Comparator<Playable> comp)
+    public void quickSortAsc(ArrayList<Playable> list) {
+        doQuickSort(list, 0, list.size()-1);
+        comp = null;
+    }
+
+    public void doQuickSort(ArrayList<Playable> list, int p, int r)
     {
         if(p<r)
         {
-            int q = partition(list,p,r, comp);
-            doQuickSort(list,p,q, comp);
-            doQuickSort(list,q+1,r, comp);
+            int q = partition(list,p,r);
+            doQuickSort(list,p,q);
+            doQuickSort(list,q+1,r);
         }
     }
 
-    private static int partition(ArrayList<Playable> list, int p, int r, Comparator<Playable> comp) {
+    private int partition(ArrayList<Playable> list, int p, int r) {
 
         Playable pivot = list.get(p);
         int i = p-1 ;
@@ -50,14 +58,12 @@ public class QuickSort {
         }
     }
 
-    public void quickSortDesc(ArrayList<Playable> list, Comparator<Playable> comp) {
-        doQuickSortDesc(list, comp, 0, list.size()-1);
-
-        Playable person = list.get(0);
-        person.getGUID();
+    public void quickSortDesc(ArrayList<Playable> list) {
+        doQuickSortDesc(list, 0, list.size()-1);
+        comp = null;
     }
 
-    public void doQuickSortDesc(ArrayList<Playable> list, Comparator<Playable> comp, int left, int right) {
+    public void doQuickSortDesc(ArrayList<Playable> list, int left, int right) {
         final Playable pivot = list.get((left+right)/2);        // <== Fix pivot value.
         int l = left;
         int r = right;
@@ -81,10 +87,10 @@ public class QuickSort {
             }
         }
         if (left < r) {
-            doQuickSortDesc(list, comp, left, r);
+            doQuickSortDesc(list, left, r);
         }
         if (l < right) {
-            doQuickSortDesc(list, comp, l, right);
+            doQuickSortDesc(list, l, right);
         }
     }
 
