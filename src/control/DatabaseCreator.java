@@ -1,6 +1,9 @@
 package control;
 
+import control.Sorting.SorterHolder;
 import model.Playable;
+import model.Release;
+
 
 import java.util.ArrayList;
 
@@ -10,62 +13,48 @@ public class DatabaseCreator {
     private ReleaseHolder releaseHolder;
     private SongHolder songHolder;
     private CSVReader csvReader;
+    private SorterHolder sorterHolder;
 
-    private final String artistsFile = "artists.csv";
-    private final String songsFile = "songs.csv";
-    private final String releaseFile = "releases.csv";
+    public static final String ARTISTSFILE = "artists.csv";
+    public static final String SONGSFILE = "songs.csv";
+    public static final String RELEASEFILE = "releases.csv";
 
     public DatabaseCreator(CSVReader csvReader, ArtistHolder artistHolder, ReleaseHolder releaseHolder,
-                           SongHolder songHolder) {
+                           SongHolder songHolder, SorterHolder sHolder) {
         this.artistHolder = artistHolder;
         this.releaseHolder = releaseHolder;
         this.songHolder = songHolder;
         this.csvReader = csvReader;
+        this.sorterHolder = sHolder;
     }
 
     public void loadDatabase() {
-        fillArtistHolder();
-        fillSongHolder();
-        fillReleaseHolder();
+        fillPlayableHolder(artistHolder, ARTISTSFILE);
+        fillPlayableHolder(songHolder, SONGSFILE);
+        fillPlayableHolder(releaseHolder, RELEASEFILE);
     }
 
-    private void fillArtistHolder() {
-        ArrayList<String[]> artistData = csvReader.loadFile(artistsFile);
+    private void fillPlayableHolder(PlayableHolder holder, String filename) {
+        ArrayList<String[]> playableData = csvReader.loadFile(filename);
 
-        for (String[] data : artistData) {
-            artistHolder.add(data);
+        for (String[] data : playableData) {
+            holder.add(data);
+            String[] relationList = holder.getRelations(data[0]);
+            if (relationList != null)
+                createRelations(data[0], relationList);
         }
-        System.out.println("Added " + artistData.size() + " artists to the database.");
+        System.out.println("Added " + playableData.size() + " playable elements to the database from " + filename);
     }
 
-    private void fillSongHolder() {
-        ArrayList<String[]> songData = csvReader.loadFile(songsFile);
-
-        for (String[] data : songData) {
-            songHolder.add(data);
+    private void createRelations(String guid, String[] relationList) {
+        if (artistHolder.containsArtistGUID(relationList[0])){
+            Playable relatedSong = songHolder.get(guid);
+            artistHolder.attachPlayableToArtist(relatedSong, relationList[0]);
+        } else {
+            ArrayList<Playable> songList = songHolder.getSongList(relationList);
+            releaseHolder.createRelations(guid, songList);
+            Release currentRelease = (Release)releaseHolder.get(guid);
+            artistHolder.attachPlayableToArtist(currentRelease, currentRelease.getAGUID());
         }
-        System.out.println("Added " + songData.size() + " song to the database.");
-    }
-
-    private void fillReleaseHolder() {
-        ArrayList<String[]> releaseData = csvReader.loadFile(releaseFile);
-
-        for (String[] data : releaseData) {
-            releaseHolder.add(data);
-        }
-        System.out.println("Added " + releaseData.size() + " releases to the database.");
-    }
-    public Playable getPlayable(String id) {
-        Playable foundPlayable = null;
-        if (artistHolder.get(id) != null){
-            foundPlayable = artistHolder.get(id);
-        }
-        else if (songHolder.get(id) != null){
-            foundPlayable = songHolder.get(id);
-        }
-        else if (releaseHolder.get(id) != null){
-            foundPlayable = releaseHolder.get(id);
-        }
-        return foundPlayable;
     }
 }

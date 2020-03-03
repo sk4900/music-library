@@ -4,5 +4,7 @@ import model.Playable;
 
 public interface PlayableHolder {
     boolean add(String[] playableData);
-    public Playable get(String guid);
+    String[] getRelations(String guid);
+    Playable get(String guid);
+
 }

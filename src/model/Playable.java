@@ -1,5 +1,8 @@
 package model;
 
 public interface Playable {
-    public String getGUID();
+    String getGUID();
+    String getName();
+    void explore();
+
 }
