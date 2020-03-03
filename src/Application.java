@@ -108,10 +108,11 @@ public final class Application {
 
             if (array[0].equals("add")){
                 if (array[1].equals("song")){
-                    Command theCommand = new Command(new AddPlayable(songHolder.get(songHolder.IDGivenName(array[1]))),
-                            songHolder.get(songHolder.IDGivenName(array[1])));
+                    Command theCommand = new Command(new AddPlayable(songHolder.get(songHolder.IDGivenName(array[2]))));
+
+                    System.out.print(songHolder.get(songHolder.IDGivenName(array[2])).getName());
+
                     System.out.println(array[2]);
-                    System.out.println(songHolder.get(songHolder.IDGivenName(array[1])));
                     theCommand.commandRequest();
                 }
             }
