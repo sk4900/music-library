@@ -45,7 +45,7 @@ public class CSVReader {
         line = line.substring(++commaBreak);
         commaBreak = line.indexOf(",");
         String duration = line.substring(0, commaBreak);
-        String title = line.substring(commaBreak+2, line.length()-2);
+        String title = line.substring(commaBreak+2, line.length()-1);
         String[] commaFields = {guid, aguid, duration, title};
         return commaFields;
     }

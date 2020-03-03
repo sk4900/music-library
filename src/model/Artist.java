@@ -42,16 +42,20 @@ public class Artist implements Playable{
 
     public String getName() {return name;}
 
-    public String toString() {
-
-        return name + ", " + guid + ", " + disamb;
-    }
-
     public void explore () {
         System.out.println(this.toString());
         for (Playable creat : playableCreations) {
             creat.explore();
         }
+    }
+
+    public String toString() {
+        String s = name + ", ";
+        if (!disamb.equals(""))
+            s += (disamb + ", " + getDuration());
+        else
+            s += getDuration();
+        return s;
     }
 
 
