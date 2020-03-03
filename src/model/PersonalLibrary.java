@@ -44,7 +44,7 @@ public class PersonalLibrary {
             collection.put(playable.getGUID(), playable);
             ratings.put(playable.getGUID(), 0);
             try {
-                FileWriter myWriter = new FileWriter("filename.txt");
+                FileWriter myWriter = new FileWriter(filename);
                 myWriter.write(playable.getGUID() + "\n");
                 myWriter.close();
             } catch (IOException e) {

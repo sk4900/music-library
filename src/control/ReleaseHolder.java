@@ -40,4 +40,10 @@ public class ReleaseHolder implements PlayableHolder {
     public Playable get(String id) {
         return releases.get(id);
    }
+
+   public void searchByName(String name){
+
+
+
+   }
 }
