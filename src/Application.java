@@ -19,11 +19,12 @@ public final class Application {
     private static SorterHolder sorterHolder;
     private static ArtistHolder artistHolder;
     private static PersonalLibrary library;
+    private static ReleaseHolder releaseHolder;
 
     private static void initDatabase() {
         CSVReader csvReader = new CSVReader();
         artistHolder = new ArtistHolder();
-        ReleaseHolder releaseHolder = new ReleaseHolder();
+        releaseHolder = new ReleaseHolder();
         Application.songHolder = new SongHolder();
         Application.sorterHolder = new SorterHolder();
         DatabaseCreator databaseCreator = new DatabaseCreator(csvReader, artistHolder, releaseHolder, songHolder, sorterHolder);
@@ -110,9 +111,6 @@ public final class Application {
 
                     Command theCommand = new Command(new AddPlayable(library));
                     theCommand.commandRequest(songHolder.get(songHolder.IDGivenName(array[2])));
-                    System.out.print(songHolder.get(songHolder.IDGivenName(array[2])).getName());
-
-                    System.out.println(array[2]);
                 }
             }
 
