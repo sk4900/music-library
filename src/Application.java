@@ -110,7 +110,7 @@ public final class Application {
                 ArrayList<String> result = artistHolder.searchArtists(slice);
 
                 if (result.size() == 0) {
-                    System.out.println("Sorry, no songs matched your query.");
+                    System.out.println("Sorry, no artists matched your query.");
                     System.out.println();
                 }
 
@@ -126,14 +126,40 @@ public final class Application {
 
             if (array[0].equals("search_songs")){
 
+                int len = array.length;
+                String[] slice = Arrays.copyOfRange(array, 2, len);
+
                 if(array[1].equals("artist")){
 
                 }
 
                 else if(array[1].equals("title")) {
 
-                    int len = array.length - 2;
+                    System.out.println(slice[0]);
+                    ArrayList<String> result = songHolder.searchByName(slice);
 
+                    songHolder.setSorter(nameSort);
+                    ArrayList<Playable> results = songHolder.findMatches(slice[0]);
+
+                    for (Playable item : results){
+                        System.out.println(item.getName());
+                    }
+
+                    /*
+                    if (result.size() == 0) {
+                        System.out.println("Sorry, no songs matched your query.");
+                        System.out.println();
+                    }
+
+                    else {
+                        System.out.println("Search Results: ");
+
+                        for (String name : result) {
+                            System.out.println(name);
+                        }
+                        System.out.println();
+                    }
+*/
 
                 }
 
