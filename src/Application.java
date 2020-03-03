@@ -37,11 +37,14 @@ public final class Application {
      */
     public static void main(String[] args){
         initDatabase();
+
         SongSorter nameSort =  (SongSorter)Application.sorterHolder.getSorter("song", "name");
         SongSorter guidSort = (SongSorter)Application.sorterHolder.getSorter("song", "guid");
         SongSorter aguidSort = (SongSorter)Application.sorterHolder.getSorter("song", "aguid");
 
-        Artist imogen = (Artist)artistHolder.get("328d146c-79f1-4eb6-9e40-8ee5710c14e5");
+        Artist imogen = (Artist)artistHolder.get("7746d775-9550-4360-b8d5-c37bd448ce01");
+        songHolder.setSorter(nameSort);
+        ArrayList<Playable> songs = songHolder.findMatches("The");
 
         imogen.explore();
 

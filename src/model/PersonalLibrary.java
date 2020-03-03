@@ -15,7 +15,7 @@ public class PersonalLibrary {
         ArtistHolder artistHolder = new ArtistHolder();
         ReleaseHolder releaseHolder = new ReleaseHolder();
         SongHolder songHolder = new SongHolder();
-        this.library = new DatabaseCreator(csvReader, artistHolder, releaseHolder, songHolder);
+        //this.library = new DatabaseCreator(csvReader, artistHolder, releaseHolder, songHolder);
     }
     private void CreateLibrary(DatabaseCreator database){
         try {
@@ -29,7 +29,7 @@ public class PersonalLibrary {
                 String line = reader.readLine();
                 while (line != null) {
                     line = reader.readLine();
-                    this.collection.put(line, database.getPlayable(line));
+                    //this.collection.put(line, database.getPlayable(line));
                 }
                 reader.close();
             }

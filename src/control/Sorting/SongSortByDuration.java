@@ -6,11 +6,11 @@ import util.QuickSort;
 
 import java.util.ArrayList;
 
-public class SongSortByName extends SongSorter {
+public class SongSortByDuration extends SongSorter {
 
     private final QuickSort quickSort;
 
-    public SongSortByName (QuickSort quickSort){
+    public SongSortByDuration (QuickSort quickSort){
         this.quickSort = quickSort;
     }
 
@@ -25,12 +25,20 @@ public class SongSortByName extends SongSorter {
     }
 
     public ArrayList<Playable> find(ArrayList<Playable> songs, String parameter) {
+
+        int duration = Integer.valueOf(parameter);
         ArrayList<Playable> matches = new ArrayList<>();
 
-        for (Playable song : songs) {
-            if (song.getName().contains(parameter))
-                matches.add(song);
+        sortAscending(songs);
+
+        int index = binarySearch(songs, parameter, 0, songs.size()-1);
+        String currentGUID = songs.get(index).getGUID();
+
+        while (currentGUID.equals(parameter)){
+            Playable currentSong = songs.remove(index);
+            matches.add(currentSong);
         }
+
         return matches;
     }
 
@@ -42,12 +50,11 @@ public class SongSortByName extends SongSorter {
             return -1;
         }
 
-        Song currentSong = (Song)(songs.get(pivot));
-        String currentName = currentSong.getName();
+        String currentGUID = songs.get(pivot).getGUID();
 
-        if (parameter.compareTo(currentName) == 0)
+        if (parameter.compareTo(currentGUID) == 0)
             return pivot;
-        else if (parameter.compareTo(currentName) < 0 )
+        else if (parameter.compareTo(currentGUID) < 0 )
             return binarySearch(songs, parameter, low, pivot - 1);
         else
             return binarySearch(songs, parameter, pivot+1, high);
@@ -57,7 +64,6 @@ public class SongSortByName extends SongSorter {
     public int compare(Playable p1, Playable p2) {
         Song s1 = (Song) p1;
         Song s2 = (Song) p2;
-        return s1.getName().compareToIgnoreCase(s2.getName());
+        return s1.getGUID().compareTo(s2.getGUID());
     }
 }
-
