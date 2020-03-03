@@ -6,11 +6,12 @@ import model.Playable;
 public class RateSong implements Action{
     private int rating;
     private PersonalLibrary library;
-    public RateSong(int rating){
+    private Playable playable;
+    public RateSong(Playable playable, int rating){
         this.rating = rating;
+        this.playable = playable;
     }
-    @Override
-    public void performAction(Playable playable) {
+    public void performAction() {
         library.rateSong(rating, playable);
     }
 }

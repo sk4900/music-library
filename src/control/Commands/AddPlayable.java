@@ -5,8 +5,11 @@ import model.Playable;
 
 public class AddPlayable implements Action {
     private PersonalLibrary library;
-
-    public void performAction(Playable playable) {
+    private Playable playable;
+    public AddPlayable(Playable playable){
+        this.playable = playable;
+    }
+    public void performAction() {
         library.add(playable);
     }
 }

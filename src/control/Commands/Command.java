@@ -11,7 +11,7 @@ public class Command {
         this.playable = playable;
     }
     public void commandRequest(){
-        action.performAction(playable);
+        action.performAction();
     }
 }
 
