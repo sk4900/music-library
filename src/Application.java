@@ -8,6 +8,7 @@ import model.Playable;
 import model.Song;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -35,13 +36,14 @@ public final class Application {
      * @param args expects and parses commands from the user.
      */
     public static void main(String[] args){
-        /*initDatabase();
+        initDatabase();
         SongSorter nameSort =  (SongSorter)Application.sorterHolder.getSorter("song", "name");
         SongSorter guidSort = (SongSorter)Application.sorterHolder.getSorter("song", "guid");
         SongSorter aguidSort = (SongSorter)Application.sorterHolder.getSorter("song", "aguid");
 
         Artist imogen = (Artist)artistHolder.get("328d146c-79f1-4eb6-9e40-8ee5710c14e5");
-        imogen.explore();*/
+
+        imogen.explore();
 
         System.out.println("Welcome to the Muze Musical System. Please enter your commands.");
         System.out.println("Enter help for a list of commands.");
@@ -100,7 +102,26 @@ public final class Application {
             if (array[0].equals("exit")){break;}
 
             if (array[0].equals("search_artist")){
-                //execute artist search in database
+
+                int end = array.length;
+
+                String[] slice = Arrays.copyOfRange(array, 1, end);
+
+                ArrayList<String> result = artistHolder.searchArtists(slice);
+
+                if (result.size() == 0) {
+                    System.out.println("Sorry, no songs matched your query.");
+                    System.out.println();
+                }
+
+                else {
+                    System.out.println("Search Results: ");
+
+                    for (String name : result) {
+                        System.out.println(name);
+                    }
+                    System.out.println();
+                }
             }
 
         }
