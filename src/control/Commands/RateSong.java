@@ -8,6 +8,7 @@ public class RateSong implements Action{
     private int rating;
     public RateSong(PersonalLibrary library, int rating){
         this.library = library;
+        this.rating = rating;
     }
     public void performAction(Playable playable) {
         library.rateSong(rating, playable);

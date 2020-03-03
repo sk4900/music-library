@@ -43,6 +43,11 @@ public class ReleaseHolder implements PlayableHolder {
 
    public void searchByName(String name){
 
+        for (Release release : releases.values()){
+            if (release.getName().equals(name)){
+                System.out.println(release.getName());
+            }
+        }
 
 
    }

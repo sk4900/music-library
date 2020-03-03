@@ -124,6 +124,7 @@ public final class Application {
             }
 
             if (array[0].equals("rate")){
+                System.out.println(array[2]);
                 Command theCommand = new Command(new RateSong(library, Integer.parseInt(array[2])));
                 theCommand.commandRequest(songHolder.get(songHolder.IDGivenName(array[1])));
 
