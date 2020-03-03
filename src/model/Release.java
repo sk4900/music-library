@@ -19,6 +19,8 @@ public class Release implements Playable {
         this.songs = songs;
     }
 
+    public ArrayList<Playable> getTrackList() {return songs;}
+
     public String getGUID() {return guid;}
 
     public String getName() {return title;}
