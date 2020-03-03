@@ -1,7 +1,5 @@
 import control.*;
-import control.Commands.Action;
-import control.Commands.AddPlayable;
-import control.Commands.Command;
+import control.Commands.*;
 import control.Sorting.PlayableSorter;
 import control.Sorting.SongSortByAGUID;
 import control.Sorting.SongSorter;
@@ -108,10 +106,28 @@ public final class Application {
 
             if (array[0].equals("add")){
                 if (array[1].equals("song")){
+
+                    Command theCommand = new Command(new AddPlayable(library));
+                    theCommand.commandRequest(songHolder.get(songHolder.IDGivenName(array[2])));
                     System.out.print(songHolder.get(songHolder.IDGivenName(array[2])).getName());
 
                     System.out.println(array[2]);
                 }
+            }
+
+            if (array[0].equals("remove")){
+                if (array[1].equals("song")){
+
+                    Command theCommand = new Command(new RemovePlayable(library));
+                    theCommand.commandRequest(songHolder.get(songHolder.IDGivenName(array[2])));
+
+                }
+            }
+
+            if (array[0].equals("rate")){
+                Command theCommand = new Command(new RateSong(library, Integer.parseInt(array[2])));
+                theCommand.commandRequest(songHolder.get(songHolder.IDGivenName(array[1])));
+
             }
 
             if (array[0].equals("search_artists")){
