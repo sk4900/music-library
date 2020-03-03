@@ -1,4 +1,6 @@
 import control.*;
+import control.Commands.Action;
+import control.Commands.AddPlayable;
 import control.Sorting.PlayableSorter;
 import control.Sorting.SongSortByAGUID;
 import control.Sorting.SongSorter;
@@ -104,6 +106,10 @@ public final class Application {
 
             if (array[0].equals("exit")){break;}
 
+            if (array[0].equals("add")){
+
+            }
+
             if (array[0].equals("search_artists")){
 
                 int end = array.length;
@@ -133,12 +139,13 @@ public final class Application {
                 String[] slice = Arrays.copyOfRange(array, 2, len);
 
                 if(array[1].equals("artist")){
-
+                    System.out.println(slice[0]);
+                    String GUID = artistHolder.NameToID(slice);
+                    songHolder.listSongs(GUID);
                 }
 
                 else if(array[1].equals("title")) {
 
-                    System.out.println(slice[0]);
                     ArrayList<String> result = songHolder.searchByName(slice);
 
                     songHolder.setSorter(nameSort);

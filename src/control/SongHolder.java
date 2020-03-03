@@ -80,4 +80,15 @@ public class SongHolder implements PlayableHolder{
         }
         return results;
     }
+
+    public void listSongs(String GUID){
+        for (Song song : songs.values()){
+
+            if (song.getAGUID().equals(GUID)){
+                System.out.println(song.getName());
+            }
+
+
+        }
+    }
 }

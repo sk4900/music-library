@@ -7,10 +7,7 @@ import model.Playable;
 import util.QuickSort;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ArtistHolder implements PlayableHolder {
     private HashMap<String, Artist> artists;
@@ -65,6 +62,30 @@ public class ArtistHolder implements PlayableHolder {
         }
 
         return results;
+    }
+
+    public String NameToID(String[] name){
+
+        String testName = name[0];
+
+        if (name.length == 1) {
+            for (Artist person : artists.values()) {
+                if (person.getName().equals(name[0])) {
+                    return person.getGUID();
+                }
+            }
+        }
+
+        else {
+            for (Artist person : artists.values()){
+                if (Arrays.equals(person.getName().split(" "), name)){
+                    System.out.println("YAHOO");
+                    return person.getGUID();
+                }
+            }
+        }
+
+        return null;
     }
 
 }
