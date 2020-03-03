@@ -91,4 +91,34 @@ public class SongHolder implements PlayableHolder{
 
         }
     }
+
+    public void listSongByDuration(int dur, String condition){
+
+        if (condition.equals("longer")){
+            for (Song song : songs.values()){
+                if (song.getDuration() >= dur){
+                    System.out.println(song.getName());
+                }
+            }
+        }
+
+        else if (condition.equals("shorter")){
+            for (Song song : songs.values()){
+                if (song.getDuration() <= dur ){
+                    System.out.println(song.getName());
+                }
+            }
+        }
+
+    }
+
+    public String IDGivenName(String name){
+        for (Song song : songs.values()){
+            if (name.equals(song.getName())){
+                return song.getGUID();
+            }
+        }
+        return null;
+    }
+
 }
